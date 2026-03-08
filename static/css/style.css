@@ -118,6 +118,7 @@ a {
   border-radius: var(--radius);
   opacity: 0;
   transition: opacity var(--transition);
+  pointer-events: none;
 }
 
 .card:hover {
@@ -179,6 +180,8 @@ a {
   cursor: pointer;
   transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
   color: #fff;
+  position: relative;
+  z-index: 2;
 }
 .btn-launch:hover  { transform: scale(1.04); opacity: .9; }
 .btn-launch:active { transform: scale(.97); }
