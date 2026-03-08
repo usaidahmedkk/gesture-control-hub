@@ -1,6 +1,7 @@
 """Gesture Control Hub — Main Flask application."""
 
 import threading
+import time
 import cv2
 from flask import Flask, Response, render_template, jsonify, request
 
@@ -47,7 +48,10 @@ def _stop_current():
     """Stop & release whatever project is currently running (call with lock)."""
     global _active_project, _processor, _cap
     if _cap is not None:
-        _cap.release()
+        try:
+            _cap.release()
+        except Exception:
+            pass
         _cap = None
     if _processor is not None:
         try:
@@ -65,7 +69,13 @@ def _generate_frames(project_name):
             if _active_project != project_name or _cap is None:
                 break
             ret, frame = _cap.read()
-            if not ret:
+
+        if not ret:
+            time.sleep(0.01)
+            continue
+
+        with _lock:
+            if _processor is None:
                 break
             try:
                 frame = _processor.process_frame(frame)
@@ -79,6 +89,7 @@ def _generate_frames(project_name):
             b"--frame\r\n"
             b"Content-Type: image/jpeg\r\n\r\n" + buffer.tobytes() + b"\r\n"
         )
+        time.sleep(0.03)  # ~30 FPS cap
 
 
 # ---------------------------------------------------------------------------
@@ -128,14 +139,24 @@ def start_project(project_name):
         # Stop any running project first
         _stop_current()
 
-        cap = cv2.VideoCapture(0)
+        # Try DirectShow backend first (Windows), then default, then index 1
+        cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
         if not cap.isOpened():
-            return jsonify({"status": "error", "message": "Camera not found"}), 500
+            cap = cv2.VideoCapture(0)
+        if not cap.isOpened():
+            cap = cv2.VideoCapture(1)
+        if not cap.isOpened():
+            return jsonify({"status": "error", "message": "Cannot access camera. Close other apps using the camera."}), 500
+
+        # Set camera properties for better performance
+        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        cap.set(cv2.CAP_PROP_FPS, 30)
 
         processor = _load_processor(project_name)
         if processor is None:
             cap.release()
-            return jsonify({"status": "error", "message": "Unknown project"}), 400
+            return jsonify({"status": "error", "message": f"Unknown project: {project_name}"}), 400
 
         _cap = cap
         _processor = processor
@@ -202,4 +223,6 @@ def video_feed(project_name):
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
+    print("\n🎯 Gesture Control Hub is running!")
+    print("📡 Open your browser: http://localhost:5000\n")
     app.run(host="0.0.0.0", port=5000, debug=False, threaded=True)
