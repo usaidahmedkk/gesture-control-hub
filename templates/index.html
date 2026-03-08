@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎯 Gesture Control Hub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <h1 class="hero-title">🎯 Gesture Control Hub</h1>
+    <p class="hero-sub">Control your PC with hand gestures — no hardware required</p>
+  </header>
+
+  <!-- Project Cards -->
+  <main class="dashboard">
+
+    <!-- 1. Air Mouse -->
+    <div class="card card-1">
+      <div class="card-icon">🖐️</div>
+      <h2 class="card-title">Air Mouse</h2>
+      <p class="card-desc">Control your mouse cursor and click using hand gestures in mid-air.</p>
+      <ul class="card-gestures">
+        <li>Index finger → Move cursor</li>
+        <li>Thumb + Index pinch → Left click</li>
+        <li>Two-finger pinch → Right click</li>
+        <li>Open palm swipe → Scroll</li>
+      </ul>
+      <button class="btn-launch btn-1" onclick="location.href='/project/air_mouse'">LAUNCH</button>
+    </div>
+
+    <!-- 2. Air Canvas -->
+    <div class="card card-2">
+      <div class="card-icon">🎨</div>
+      <h2 class="card-title">Air Canvas</h2>
+      <p class="card-desc">Draw in the air — your canvas is the camera feed.</p>
+      <ul class="card-gestures">
+        <li>Index finger → Draw</li>
+        <li>All fingers up → Pause</li>
+        <li>Fist → Clear canvas</li>
+        <li>Peace / Thumbs / Pinky → Change color</li>
+      </ul>
+      <button class="btn-launch btn-2" onclick="location.href='/project/air_canvas'">LAUNCH</button>
+    </div>
+
+    <!-- 3. Media Controller -->
+    <div class="card card-3">
+      <div class="card-icon">🎵</div>
+      <h2 class="card-title">Media Controller</h2>
+      <p class="card-desc">Play, pause, skip tracks and control volume hands-free.</p>
+      <ul class="card-gestures">
+        <li>Open palm → Play / Pause</li>
+        <li>Swipe left/right → Prev / Next track</li>
+        <li>Two fingers up/down → Volume</li>
+        <li>Fist → Mute / Unmute</li>
+      </ul>
+      <button class="btn-launch btn-3" onclick="location.href='/project/media_controller'">LAUNCH</button>
+    </div>
+
+    <!-- 4. Presentation Controller -->
+    <div class="card card-4">
+      <div class="card-icon">📊</div>
+      <h2 class="card-title">Presentation Controller</h2>
+      <p class="card-desc">Navigate your slides without touching the keyboard.</p>
+      <ul class="card-gestures">
+        <li>Swipe right → Next slide</li>
+        <li>Swipe left → Previous slide</li>
+        <li>Thumbs up → Start slideshow (F5)</li>
+        <li>Fist → End slideshow (Esc)</li>
+      </ul>
+      <button class="btn-launch btn-4" onclick="location.href='/project/presentation'">LAUNCH</button>
+    </div>
+
+    <!-- 5. Sign Language Interpreter -->
+    <div class="card card-5">
+      <div class="card-icon">🤟</div>
+      <h2 class="card-title">Sign Language</h2>
+      <p class="card-desc">Real-time ASL alphabet detection — spell out words with your hands.</p>
+      <ul class="card-gestures">
+        <li>Supports A, B, C, D, E, F, I, L, O, V, W, Y</li>
+        <li>Hold sign ~1 second to register letter</li>
+        <li>Space &amp; Clear buttons for word building</li>
+        <li>Confidence percentage shown live</li>
+      </ul>
+      <button class="btn-launch btn-5" onclick="location.href='/project/sign_language'">LAUNCH</button>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>🎯 Gesture Control Hub &nbsp;|&nbsp; Built with Flask · MediaPipe · OpenCV</p>
+  </footer>
+
+</body>
+</html>
