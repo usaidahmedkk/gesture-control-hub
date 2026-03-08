@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤟 Sign Language — Gesture Control Hub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+<div class="project-page">
+
+  <div class="project-header">
+    <button class="back-btn" onclick="stopAndBack()">← Back to Dashboard</button>
+    <h1 class="project-title">🤟 Sign Language Interpreter</h1>
+    <button class="btn btn-stop" id="stopBtn" onclick="stopProject()" style="display:none">■ Stop</button>
+  </div>
+
+  <div class="project-content">
+
+    <!-- Camera feed -->
+    <div>
+      <div class="camera-container" id="cameraBox">
+        <div class="camera-placeholder" id="placeholder">
+          <span style="font-size:3rem">🤟</span>
+          <span>Click START to activate camera</span>
+        </div>
+        <img id="feed" src="" alt="Camera feed" style="display:none" />
+      </div>
+
+      <div class="btn-row mt-2">
+        <button class="btn btn-start" id="startBtn" onclick="startProject()">▶ Start</button>
+        <button class="btn btn-stop" id="stopBtn2" onclick="stopProject()" style="display:none">■ Stop</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <div class="panel">
+        <h3 style="color:var(--accent-5)">Detected Letter</h3>
+        <div class="asl-letter-display" id="letterDisplay">—</div>
+        <div style="text-align:center;font-size:.85rem;color:var(--text-muted)">
+          Confidence: <span id="confLabel" style="color:#fff">—</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="color:var(--accent-5)">Current Word</h3>
+        <div class="asl-word-display" id="wordDisplay">&nbsp;</div>
+        <div class="btn-row mt-1">
+          <button class="btn btn-action" onclick="sendAction('space')" style="background:var(--accent-5)">Space</button>
+          <button class="btn btn-action" onclick="sendAction('clear')" style="background:#e74c3c">Clear</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="color:var(--accent-5)">Supported Signs</h3>
+        <ul class="instructions-list">
+          <li><span class="icon">A</span><span>Fist with thumb beside index</span></li>
+          <li><span class="icon">B</span><span>All four fingers up, thumb tucked</span></li>
+          <li><span class="icon">C</span><span>Curved open hand</span></li>
+          <li><span class="icon">D</span><span>Index up, others curled, thumb touches middle</span></li>
+          <li><span class="icon">E</span><span>All fingertips bent</span></li>
+          <li><span class="icon">F</span><span>OK sign + other fingers up</span></li>
+          <li><span class="icon">I</span><span>Pinky only up</span></li>
+          <li><span class="icon">L</span><span>Index + thumb out (L-shape)</span></li>
+          <li><span class="icon">O</span><span>Rounded O shape</span></li>
+          <li><span class="icon">V</span><span>Peace / V sign</span></li>
+          <li><span class="icon">W</span><span>Three fingers up</span></li>
+          <li><span class="icon">Y</span><span>Thumb + pinky out</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/sign_language.js') }}"></script>
+</body>
+</html>

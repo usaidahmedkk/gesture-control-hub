@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📊 Presentation Controller — Gesture Control Hub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+<div class="project-page">
+
+  <div class="project-header">
+    <button class="back-btn" onclick="stopAndBack()">← Back to Dashboard</button>
+    <h1 class="project-title">📊 Presentation Controller</h1>
+    <button class="btn btn-stop" id="stopBtn" onclick="stopProject()" style="display:none">■ Stop</button>
+  </div>
+
+  <div class="project-content">
+
+    <!-- Camera feed -->
+    <div>
+      <div class="camera-container" id="cameraBox">
+        <div class="camera-placeholder" id="placeholder">
+          <span style="font-size:3rem">📊</span>
+          <span>Click START to activate camera</span>
+        </div>
+        <img id="feed" src="" alt="Camera feed" style="display:none" />
+      </div>
+
+      <div class="btn-row mt-2">
+        <button class="btn btn-start" id="startBtn" onclick="startProject()">▶ Start</button>
+        <button class="btn btn-stop" id="stopBtn2" onclick="stopProject()" style="display:none">■ Stop</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="panel">
+        <h3 style="color:var(--accent-4)">Status</h3>
+        <div class="status-box" id="statusBox">Waiting to start…</div>
+      </div>
+
+      <div class="panel">
+        <h3 style="color:var(--accent-4)">Gesture Guide</h3>
+        <ul class="instructions-list">
+          <li><span class="icon">👉</span><span>Swipe right → Next slide</span></li>
+          <li><span class="icon">👈</span><span>Swipe left → Previous slide</span></li>
+          <li><span class="icon">👍</span><span>Thumbs up → Start slideshow (F5)</span></li>
+          <li><span class="icon">✊</span><span>Fist → End slideshow (Esc)</span></li>
+          <li><span class="icon">🖐️</span><span>Open palm → Pause</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/presentation.js') }}"></script>
+</body>
+</html>
